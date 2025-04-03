@@ -33,16 +33,17 @@ const userController = {
             }            
             
             if ( String(data[0].password) === String(pass)){
+
                 res.status(200).json({
                                       status:200,
                                       data:[{
-                                            nombre: data[0].nombre,
-                                            enmail:data[0].email,
-                                            avatar:data[0].avatar,
-                                            rol:data[0].rol
+                                             id:data[0].id, 
+                                             nombre: data[0].nombre,
+                                             email:data[0].email,
+                                             avatar:data[0].avatar,
+                                             rol:data[0].rol
                                       }],
                                       message:'Usuario validado'
-
                 })
 
             } else{
