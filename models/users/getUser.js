@@ -9,7 +9,7 @@ export default async function getUser(user){
         client = await  pool.connect()                
 
         const  {rows}  = await client.query( 
-                                            "SELECT nombre, email, password, avatar, rol FROM usuarios WHERE email = $1;",
+                                            "SELECT id, nombre, email, password, avatar, rol FROM usuarios WHERE email = $1;",
                                             [user]
                                            )        
         return rows    
