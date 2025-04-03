@@ -1,11 +1,14 @@
 import getCategorias from "../../services/events/getCategorias.js";
 import getTipoEventos from "../../services/events/getTipoEventos.js";
+import saveEvento from "../../services/events/saveEvento.js";
 
-const handleRequest = async (serviceFunction, res, entityName) => {
+const handleRequest = async (serviceFunction, res, Datos) => {
+
+    console.log("fucnion : ",Datos)
 
     try {
 
-        const resp = await serviceFunction();
+        const resp = await serviceFunction(Datos);
 
         res.status(200).json({
                               status: 200,
@@ -30,7 +33,15 @@ const eventcontroller = {
     getTipoEventos: (req, res) => handleRequest(getTipoEventos, res ), 
     
 
-    saveEvento:(req,res)=>handleRequest(saveEvento,res)
+    saveEvento:(req,res)=>{
+        
+        const resp = req.body;
+        console.log(resp)
+
+
+        
+         handleRequest(saveEvento, res, resp)
+    }
 
     // getCategorias: async ( req, res )=>{                
 
