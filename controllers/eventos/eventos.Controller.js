@@ -1,4 +1,5 @@
 import getCategorias from "../../services/events/getCategorias.js";
+import getEventosPorMes from "../../services/events/getEventosPorMes.js";
 import getTipoEventos from "../../services/events/getTipoEventos.js";
 import saveEvento from "../../services/events/saveEvento.js";
 
@@ -28,7 +29,13 @@ const handleRequest = async (serviceFunction, res, Datos) => {
 const eventcontroller = {    
 
     getCategorias: (req, res) => handleRequest(getCategorias, res ),
-    getTipoEventos: (req, res) => handleRequest(getTipoEventos, res ),     
+    getTipoEventos: (req, res) => handleRequest(getTipoEventos, res ),         
+
+    getEventosPorMes:(req,res) => {
+        const MesABuscar = req.body
+        handleRequest(getEventosPorMes, res, MesABuscar )
+    },     
+        
 
     saveEvento:(req,res)=>{
         

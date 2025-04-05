@@ -6,6 +6,7 @@ const eventosRoter = Router()
     // GET
     eventosRoter.get('/getcategorias',eventcontroller.getCategorias)
     eventosRoter.get('/gettipos',eventcontroller.getTipoEventos)
+    eventosRoter.get('/:mes',eventcontroller.getEventosPorMes)
 
     // POST
     eventosRoter.post('/guadarevento',eventcontroller.saveEvento,)
