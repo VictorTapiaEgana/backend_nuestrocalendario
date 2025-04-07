@@ -17,6 +17,8 @@ const handleRequest = async (serviceFunction, res, Datos) => {
 
     } catch (error) {
 
+        console.log(`Error  : ${serviceFunction}: `, error)
+
         res.status(500).json({
                               status: 500,
                               data: [],
