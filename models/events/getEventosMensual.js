@@ -39,17 +39,23 @@ export default async function getEventosMensual (MesABuscar){
 
 
 
-          const { rows } = await client.query(`SELECT 
-                                                    e.*, 
-                                                    te.nombre AS tipo_evento_nombre,
-                                                    te.color AS color,
-                                                    te.icono AS icono
-                                             FROM 
-                                                    eventos e, tipos_evento te
-                                             JOIN 
-                                                    tipos_evento te ON e.tipo_evento_id = te.id                    
-                                             WHERE fecha >= $1 AND fecha < $2;`
-                                             ,[inicio, fin])   
+          const { rows } = await client.query(   `SELECT 
+                                                       e.*, 
+                                                       te.nombre AS tipo_evento_nombre,                                                      
+                                                       ce.categoria AS categoria_nombre,
+                                                       ce.color AS categoria_color,
+                                                       ce.icono AS categoria_icono
+                                                  FROM 
+                                                       eventos e
+                                                  JOIN 
+                                                       tipos_evento te ON e.tipo_evento_id = te.id
+                                                  JOIN 
+                                                       categorias ce ON e.categoria_evento_id = ce.id
+                                                  WHERE 
+                                                       fecha >= $1 AND fecha < $2;`,
+                                                  [inicio, fin]
+                                                  );
+
 
          return rows
         
