@@ -32,9 +32,23 @@ export default async function getEventosMensual (MesABuscar){
 
          client = await pool.connect()
 
-         const { rows } = await client.query(`SELECT * FROM eventos
-                                              WHERE fecha >= $1 AND fecha < $2;`
-                                              ,[inicio, fin])   
+     //     const { rows } = await client.query(`SELECT * FROM eventos,     
+     //                                          nombre FROM tipos_evento                                                  
+     //                                          WHERE fecha >= $1 AND fecha < $2;`
+     //                                          ,[inicio, fin])   
+
+
+
+     const { rows } = await client.query(`SELECT 
+                                                e.*, 
+                                               te.nombre AS tipo_evento_nombre
+                                          FROM 
+                                               eventos e
+                                          JOIN 
+                                               tipos_evento te ON e.tipo_evento_id = te.id                    
+                                          WHERE fecha >= $1 AND fecha < $2;`
+                                        ,[inicio, fin])   
+
          return rows
         
     } catch (error) {
